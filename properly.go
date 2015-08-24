@@ -107,7 +107,7 @@ func split(expr string) (keys []string, err error) {
 	keys = []string{}
 	for err == nil {
 		t := s.Peek()
-		fmt.Printf(">>> %s: %s %s\n", s.Pos(), scanner.TokenString(t), s.TokenText())
+		// fmt.Printf(">>> %s: %s %s\n", s.Pos(), scanner.TokenString(t), s.TokenText())
 		switch t {
 		case '[':
 			key, err = scanBracketedKey(&s)

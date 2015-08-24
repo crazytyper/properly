@@ -70,6 +70,9 @@ func TestValue(t *testing.T) {
 	is.Equal(1, v(Value(value, "0")))
 	is.Equal(2, v(Value(value, "1")))
 	is.Equal(3, v(Value(value, "2")))
+	is.Equal(1, v(Value(value, "[0]")))
+	is.Equal(2, v(Value(value, "[1]")))
+	is.Equal(3, v(Value(value, "[2]")))
 	is.IsType(&strconv.NumError{}, e(Value(value, "a")))
 
 	is.Equal("Hello world!", v(Value(s, "String")))
