@@ -44,6 +44,15 @@ func Value(object interface{}, expr string) (v interface{}, ok bool, err error) 
 	return
 }
 
+// String gets the string value from the object graph at the specified path.
+func String(object interface{}, expr string) (s string, ok bool, err error) {
+	value, ok, err := Value(object, expr)
+	if ok {
+		s, ok = value.(string)
+	}
+	return
+}
+
 func value(value interface{}, key string) (interface{}, bool, error) {
 	if key == "" {
 		return value, true, nil
@@ -100,10 +109,11 @@ func split(expr string) (keys []string, err error) {
 	var msgs []string
 	var s scanner.Scanner
 	s.Init(strings.NewReader(expr))
+	s.Filename = expr
 	s.Mode = scanner.ScanIdents | scanner.ScanInts | scanner.ScanStrings
 	s.Error = func(s *scanner.Scanner, msg string) { msgs = append(msgs, fmt.Sprintf("%s %s", s.Pos(), msg)) }
 
-	key := ""
+	var key string
 	keys = []string{}
 	for err == nil {
 		t := s.Peek()
